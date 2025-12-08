@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RuZERO - Login Aluno</title>
+  <link rel="stylesheet" href="/css/stylelogin.css" />
+</head>
+
+<body>
+
+<header class="cabecalho">
+  <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
+  <h1>RuZERO</h1>
+</header>
+
+<main class="container">
+  <div class="caixa-login">
+    <h2>ALUNO</h2>
+
+    <form id="loginForm">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+
+      <label for="campus">Selecione seu campus</label>
+      <select id="campus" required>
+        <option value="">Escolha...</option>
+        <option value="1">Campus I</option>
+        <option value="2">Campus II</option>
+        <option value="3">Campus III</option>
+      </select>
+
+      <button type="button" onclick="cadastrarOuLogarAluno()">ENTRAR</button>
+    </form>
+
+  </div>
+</main>
+
+<script src="js/loginAluno.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RuZERO - Verificar Cardápio</title>
+    <link rel="stylesheet" href="/css/stylecardapio.css" />
+</head>
+<body>
+
+<aside class="menu-lateral">
+    <div class="logo-area">
+        <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
+        <h1>RuZERO</h1>
+    </div>
+
+    <nav>
+        <a href="cardapioaluno.html" class="ativo">🍽️ Verificar cardápio</a>
+        <a href="avaliar.html">⭐ Avaliar satisfação</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <header class="topo">
+        <div class="titulo-area">
+            <span class="icone">🛒</span>
+            <h2>Verificar Cardápio</h2>
+        </div>
+        <div class="perfil-usuario">
+            <select id="selectCampus" class="select-campus">
+                <option value="Campus I">Campus I</option>
+                <option value="Campus II">Campus II</option>
+                <option value="Campus III">Campus III</option>
+            </select>
+            <div class="icone-usuario">👤</div>
+        </div>
+    </header>
+
+    <section class="tabela-cardapio">
+        <table>
+            <thead>
+            <tr>
+                <th>COMPOSIÇÃO</th>
+                <th>17/11</th>
+                <th>18/11</th>
+                <th>19/11</th>
+                <th>20/11</th>
+                <th>21/11</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>PRATO PRINCIPAL</td>
+                <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>ACOMPANHAMENTO</td>
+                <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>GUARNIÇÃO</td>
+                <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>SALADA</td>
+                <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>SOBREMESA</td>
+                <td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<script>
+    const campusAluno = localStorage.getItem("alunoCampus");
+    document.getElementById("campusUsuario").innerText =
+        campusAluno ? campusAluno : "Campus ?";
+</script>
+</body>
+</html>

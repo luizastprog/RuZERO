@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+body {
+    background-color: #f5f6fa;
+    color: #1b1b1b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    text-align: center;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+.titulo {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.descricao {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.6em;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+.caixa-opcao {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: #e8ecf9;
+    color: #000;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+.botao:hover {
+    background-color: #cfdaf7;
+    transform: scale(1.05);
+}
+.icone {
+    font-size: 1.3em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 95%;
+    }
+    .botoes {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

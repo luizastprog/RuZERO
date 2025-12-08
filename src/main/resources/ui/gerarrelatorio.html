@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RuZERO - Relatórios</title>
+  <link rel="stylesheet" href="/css/stylerelatorio.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<aside class="menu-lateral">
+  <div class="logo-area">
+    <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
+    <h1>RuZERO</h1>
+  </div>
+
+  <nav>
+    <a href="gestaomapa.html"> Mapa de Satisfação</a>
+    <a href="gestaorelatorio.html" class="ativo"> Gerar Relatório</a>
+    <a href="gerenciarcardapio.html"> Gerenciar Cardápio</a>
+  </nav>
+</aside>
+<main class="conteudo">
+  <header class="topo">
+    <div class="titulo-area">
+      <span class="icone"></span>
+      <h2>Relatório</h2>
+    </div>
+
+    <div class="seletor-topo">
+      <select id="selectCampus" class="select-campus">
+        <option>Campus I</option>
+        <option>Campus II</option>
+        <option>Campus III</option>
+      </select>
+      <button id="btnCalendario" class="botao-calendario"> Selecionar Data</button>
+    </div>
+    <div class="icone-usuario"></div>
+  </header>
+
+  <div id="popupCalendario" class="popup-calendario escondido">
+    <input type="date" id="inputData" />
+    <button id="fecharPopup" class="fechar-popup">Fechar</button>
+  </div>
+  <section class="painel">
+    <div class="box grande">
+      <h3>Calendário Selecionado</h3>
+      <p id="dataEscolhida" class="data-info">Nenhuma data selecionada</p>
+    </div>
+    <div class="linha-superior">
+      <div class="box medio">
+        <h3>Índice de insatisfação por horário</h3>
+        <canvas id="graficoHorario"></canvas>
+      </div>
+    </div>
+    <div class="linha-inferior">
+      <div class="box medio">
+        <h3>Percentual de insatisfação por item</h3>
+        <canvas id="graficoPizza"></canvas>
+      </div>
+      <div class="box medio">
+        <h3>Gráfico de Notas</h3>
+        <canvas id="graficoNotas"></canvas>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="script_relatorio.js"></script>
+</body>
+</html>

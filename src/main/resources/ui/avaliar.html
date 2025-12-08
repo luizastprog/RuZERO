@@ -1,0 +1,28 @@
+<form onsubmit="event.preventDefault(); enviarFeedback();">
+
+    <p class="titulo-estrelas">Dê uma nota para o almoço de hoje:</p>
+
+    <div class="estrelas">
+        <input type="radio" id="estrela5" name="nota" value="5"><label for="estrela5">★</label>
+        <input type="radio" id="estrela4" name="nota" value="4"><label for="estrela4">★</label>
+        <input type="radio" id="estrela3" name="nota" value="3"><label for="estrela3">★</label>
+        <input type="radio" id="estrela2" name="nota" value="2"><label for="estrela2">★</label>
+        <input type="radio" id="estrela1" name="nota" value="1"><label for="estrela1">★</label>
+    </div>
+
+    <label for="ruim">O que estava ruim?</label>
+    <select id="ruim" name="ruim">
+        <option value="">Selecione...</option>
+        <option value="Proteina">Proteína</option>
+        <option value="Acompanhamento">Acompanhamento</option>
+        <option value="Guarnição">Guarnição</option>
+        <option value="Salada">Salada</option>
+        <option value="Sobremesa">Sobremesa</option>
+        <option value="Outro">Outro</option>
+    </select>
+
+    <button type="submit">Enviar Avaliação</button>
+
+</form>
+
+<script src="js/feedback.js"></script>

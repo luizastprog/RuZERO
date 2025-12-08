@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RuZERO - Mapa de Satisfação</title>
+  <link rel="stylesheet" href="/css/stylegestao.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body>
+<aside class="menu-lateral">
+  <div class="logo-area">
+    <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
+    <h1>RuZERO</h1>
+  </div>
+  <nav>
+    <a href="gestaomapa.html" class="ativo"> Mapa de Satisfação</a>
+    <a href="gerarrelatorio.html"> Gerar Relatório</a>
+    <a href="gerenciarcardapio.html"> Gerenciar Cardápio</a>
+  </nav>
+</aside>
+
+<main class="conteudo">
+  <header class="topo">
+    <div class="titulo-area">
+      <span class="icone"></span>''
+      <h2>Mapa de Satisfação</h2>
+    </div>
+    <div class="perfil-usuario">
+      <div class="icone-usuario"></div>
+    </div>
+
+  </header>
+
+  <section class="painel">
+    <div class="box grande">
+      <h3>Nível de Satisfação por Campus</h3>
+      <div class="graficos-pizza">
+        <div class="grafico">
+          <canvas id="campus1"></canvas><p>Campus I</p>
+        </div>
+        <div class="grafico">
+          <canvas id="campus2"></canvas><p>Campus II</p>
+        </div>
+        <div class="grafico">
+          <canvas id="campus3"></canvas><p>Campus III</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="linha-inferior">
+      <div class="box medio">
+        <div class="grafico-header">
+          <h3>Gráfico de Notas</h3>
+          <select id="selectCampus" class="select-campus-grafico">
+            <option value="Campus I">Campus I</option>
+            <option value="Campus II">Campus II</option>
+            <option value="Campus III">Campus III</option>
+          </select>
+        </div>
+        <canvas id="graficoNotas"></canvas>
+      </div>
+
+      <div class="box medio">
+        <h3>Localização dos Campi</h3>
+        <div id="mapa"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  const dataPizza = {
+    labels: ['Satisfeito', 'Insatisfeito'],
+    datasets: [{
+      data: [75, 25],
+      backgroundColor: ['#4a68f5', '#d3dafb']
+    }]
+  };
+  const configPizza = {
+    type: 'doughnut',
+    data: dataPizza,
+    options: {
+      cutout: '65%',
+      plugins: { legend: { display: false } }
+    }
+  };
+  new Chart(document.getElementById('campus1'), configPizza);
+  new Chart(document.getElementById('campus2'), configPizza);
+  new Chart(document.getElementById('campus3'), configPizza);
+
+  const ctx = document.getElementById("graficoNotas");
+  let graficoNotas = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["01", "02", "03", "04", "05"],
+      datasets: [{
+        data: [5, 2, 4, 3, 2],
+        backgroundColor: "rgba(93,118,255,0.8)",
+        borderRadius: 12,
+        barThickness: 38
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          ticks: { color: "#666", font: { size: 14 } },
+          grid: { display: false }
+        },
+        y: {
+          ticks: { display: false },
+          grid: { display: false },
+          beginAtZero: true,
+          max: 6
+        }
+      }
+    }
+  });
+
+  const mapa = L.map('mapa').setView([-5.355, -49.070], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(mapa);
+
+  const campi = [
+    { nome: 'Campus I', coord: [-5.35065, -49.09354] },
+    { nome: 'Campus II', coord: [-5.334914, -49.093061] },
+    { nome: 'Campus III', coord: [-5.36500, -49.02425] }
+  ];
+  campi.forEach(c => {
+    L.marker(c.coord).addTo(mapa).bindPopup(`<b>${c.nome}</b><br>Satisfação média: 4.2⭐`);
+  });
+
+  const selectCampus = document.getElementById("selectCampus");
+  const salvo = localStorage.getItem("campusGestao");
+  if (salvo) selectCampus.value = salvo;
+  selectCampus.addEventListener("change", () => {
+    localStorage.setItem("campusGestao", selectCampus.value);
+  });
+</script>
+
+</body>
+</html>
