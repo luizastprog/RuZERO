@@ -5,15 +5,15 @@ public class Aluno {
     private Integer idAluno;
     private String nome;
     private String email;
-    private Campus campus;
+    private Integer idCampus;
 
     public Aluno() {}
 
-    public Aluno(Integer idAluno, String nome, String email, Campus campus) {
+    public Aluno(Integer idAluno, String nome, String email, Integer idCampus) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.email = email;
-        this.campus = campus;
+        this.idCampus = idCampus;
     }
 
     public Integer getIdAluno() {
@@ -40,12 +40,12 @@ public class Aluno {
         this.email = email;
     }
 
-    public Campus getCampus() {
-        return campus;
+    public Integer getIdCampus() {
+        return idCampus;
     }
 
-    public void setCampus(Campus campus) {
-        this.campus = campus;
+    public void setIdCampus(Integer idCampus) {
+        this.idCampus = idCampus;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Aluno {
                 "idAluno=" + idAluno +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
-                ", campus=" + (campus != null ? campus.getNome() : "null") +
+                ", idCampus=" + idCampus +
                 '}';
     }
 }

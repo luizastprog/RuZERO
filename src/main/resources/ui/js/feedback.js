@@ -3,8 +3,8 @@ async function enviarFeedback() {
     const nota = document.querySelector('input[name="nota"]:checked')?.value;
     const comentario = document.getElementById("ruim").value;
 
-    const idAluno = localStorage.getItem("alunoId");
-    const idCampus = localStorage.getItem("alunoCampusId");
+    const idAluno = Number(localStorage.getItem("alunoId"));
+    const idCampus = Number(localStorage.getItem("alunoCampusId"));
 
     if (!nota) {
         alert("Selecione uma nota!");
@@ -12,17 +12,16 @@ async function enviarFeedback() {
     }
 
     if (!idAluno || !idCampus) {
-        alert("Erro: dados do aluno não encontrados. Faça login novamente.");
+        alert("Sessão expirada. Faça login novamente.");
+        window.location.href = "login.html";
         return;
     }
 
     const feedback = {
         nota: nota,
         comentario: comentario,
-        alunoMatricula: parseInt(idAluno),
-        campus: {
-            idCampus: parseInt(idCampus)
-        }
+        idAluno: idAluno,     // ✅ CORRETO
+        idCampus: idCampus   // ✅ CORRETO
     };
 
     console.log("Enviando feedback para API:", feedback);
@@ -38,7 +37,7 @@ async function enviarFeedback() {
 
         if (!response.ok) {
             console.error(body);
-            alert("Erro ao enviar feedback: " + (body.message || "Erro desconhecido"));
+            alert("Erro ao enviar feedback: " + (body.mensagem || "Erro desconhecido"));
             return;
         }
 

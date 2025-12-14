@@ -1,10 +1,16 @@
 package web.api;
 
 import static spark.Spark.*;
+
 import com.google.gson.Gson;
-import servicosTecnicos.FeedbackDAO;
+import com.google.gson.GsonBuilder;
 import dominio.Feedback;
+import servicosTecnicos.FeedbackDAO;
+import util.LocalDateTimeAdapter;
+
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class FeedbackController {
 
@@ -12,69 +18,63 @@ public class FeedbackController {
     private final Gson gson;
 
     public FeedbackController() {
+
         this.feedbackDAO = new FeedbackDAO();
-        this.gson = new Gson();
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
+
         setupEndpoints();
     }
 
     private void setupEndpoints() {
+
         final String PATH = "/feedbacks";
 
         post(PATH, (req, res) -> {
+
             try {
-                System.out.println("\n========== FEEDBACK RECEBIDO ==========");
-                System.out.println("RAW JSON → " + req.body());
+                Feedback fb = gson.fromJson(req.body(), Feedback.class);
 
-                Feedback novoFeedback = gson.fromJson(req.body(), Feedback.class);
-
-                System.out.println("OBJETO CAMPUS → " + novoFeedback.getCampus());
-                if (novoFeedback.getCampus() != null) {
-                    System.out.println("ID DO CAMPUS → " + novoFeedback.getCampus().getIdCampus());
-                } else {
-                    System.out.println("ID DO CAMPUS → CAMPUS NULL");
+                if (fb.getIdCampus() == null || fb.getIdAluno() == null) {
+                    res.status(400);
+                    return gson.toJson(
+                            new RespostaErro("Campus ou aluno inválido.")
+                    );
                 }
 
-                System.out.println("ID DO ALUNO → " + novoFeedback.getAlunoMatricula());
-                System.out.println("NOTA → " + novoFeedback.getNota());
-                System.out.println("COMENTARIO → " + novoFeedback.getComentario());
-                System.out.println("=========================================\n");
-
-                feedbackDAO.salvar(novoFeedback);
+                feedbackDAO.salvar(fb);
 
                 res.status(201);
-                return gson.toJson(novoFeedback);
+                res.type("application/json");
+                return gson.toJson(fb);
 
             } catch (Exception e) {
                 res.status(400);
-                return gson.toJson(new RespostaErro("Erro ao enviar avaliação: " + e.getMessage()));
+                return gson.toJson(
+                        new RespostaErro("Erro ao enviar feedback: " + e.getMessage())
+                );
             }
         });
 
-
-        get(PATH, (req, res) -> {
-            try {
-                List<Feedback> feedbacks = feedbackDAO.listarTodos();
-                res.status(200);
-                return gson.toJson(feedbacks);
-            } catch (Exception e) {
-                res.status(500);
-                return gson.toJson(new RespostaErro("Erro ao listar feedbacks: " + e.getMessage()));
-            }
-        });
+        get(PATH, (req, res) -> gson.toJson(feedbackDAO.listarTodos()));
 
         get(PATH + "/campus/:campusId", (req, res) -> {
-            try {
-                int campusId = Integer.parseInt(req.params(":campusId"));
-                List<Feedback> feedbacks = feedbackDAO.listarPorCampus(campusId);
-                res.status(200);
-                return gson.toJson(feedbacks);
-            } catch (NumberFormatException e) {
-                res.status(400);
-                return gson.toJson(new RespostaErro("ID de Campus inválido."));
-            } catch (Exception e) {
-                res.status(500);
-                return gson.toJson(new RespostaErro("Erro ao listar feedbacks por campus: " + e.getMessage()));
-            }
+            int idCampus = Integer.parseInt(req.params("campusId"));
+            return gson.toJson(feedbackDAO.listarPorCampus(idCampus));
+        });
+
+        get(PATH + "/medias/mapa", (req, res) ->
+                gson.toJson(feedbackDAO.listarMediasPorCampus())
+        );
+
+        get(PATH + "/horarios/media/:campusId", (req, res) -> {
+
+            int idCampus = Integer.parseInt(req.params("campusId"));
+            List<Map<String, Object>> dados =
+                    feedbackDAO.listarMediaNotasPorHorario(idCampus);
+
+            return gson.toJson(dados);
         });
     }
 }

@@ -21,9 +21,9 @@ async function enviarFeedback() {
     const feedback = {
         nota: nota.value,
         comentario: comentario,
-        alunoMatricula: parseInt(idAluno),
+        alunoIdAluno: parseInt(idAluno),    // ✔ CORRETO
         campus: {
-            idCampus: parseInt(idCampus)
+            idCampus: parseInt(idCampus)    // ✔ CORRETO
         }
     };
 

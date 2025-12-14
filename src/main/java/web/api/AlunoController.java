@@ -8,12 +8,10 @@ import static spark.Spark.*;
 
 public class AlunoController {
 
-    private final AlunoDAO alunoDAO;
-    private final Gson gson;
+    private final AlunoDAO alunoDAO = new AlunoDAO();
+    private final Gson gson = new Gson();
 
     public AlunoController() {
-        this.alunoDAO = new AlunoDAO();
-        this.gson = new Gson();
         setupEndpoints();
     }
 
@@ -22,30 +20,34 @@ public class AlunoController {
         final String PATH = "/alunos";
 
         post(PATH + "/login", (req, res) -> {
-            Aluno alunoReq = gson.fromJson(req.body(), Aluno.class);
 
-            Aluno aluno = alunoDAO.buscarPorEmail(alunoReq.getEmail());
+            Aluno reqAluno = gson.fromJson(req.body(), Aluno.class);
+            Aluno aluno = alunoDAO.buscarPorEmail(reqAluno.getEmail());
 
-            if (aluno != null) {
-                res.status(200);
-                return gson.toJson(aluno);
-            } else {
+            if (aluno == null) {
                 res.status(401);
-                return gson.toJson(new RespostaErro("Email não encontrado!"));
+                return gson.toJson(new RespostaErro("Aluno não encontrado!"));
             }
+
+            res.status(200);
+            res.type("application/json");
+            return gson.toJson(aluno);
         });
 
         post(PATH + "/cadastrar", (req, res) -> {
-            try {
-                Aluno novoAluno = gson.fromJson(req.body(), Aluno.class);
-                alunoDAO.salvar(novoAluno);
 
-                res.status(201);
-                return gson.toJson(novoAluno);
-            } catch (Exception e) {
-                res.status(400);
-                return gson.toJson(new RespostaErro("Erro ao cadastrar aluno: " + e.getMessage()));
+            Aluno aluno = gson.fromJson(req.body(), Aluno.class);
+
+            if (alunoDAO.buscarPorEmail(aluno.getEmail()) != null) {
+                res.status(409);
+                return gson.toJson(new RespostaErro("Email já cadastrado!"));
             }
+
+            alunoDAO.salvar(aluno);
+
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(aluno);
         });
     }
 }

@@ -1,9 +1,11 @@
 package web.api;
 
 import static spark.Spark.*;
+
 import com.google.gson.Gson;
-import servicosTecnicos.NotaAlunosDAO;
 import dominio.NotaAlunos;
+import servicosTecnicos.NotaAlunosDAO;
+
 import java.util.List;
 
 public class NotaAlunosController {
@@ -18,17 +20,21 @@ public class NotaAlunosController {
     }
 
     private void setupEndpoints() {
+
         final String PATH = "/relatorios";
 
         get(PATH + "/mapa", (req, res) -> {
             try {
                 List<NotaAlunos> dadosMapa = notaAlunosDAO.listarMediaPorCampus();
-
                 res.status(200);
+                res.type("application/json");
                 return gson.toJson(dadosMapa);
+
             } catch (Exception e) {
                 res.status(500);
-                return gson.toJson(new RespostaErro("Erro ao buscar dados do mapa: " + e.getMessage()));
+                return gson.toJson(
+                        new RespostaErro("Erro ao buscar dados do mapa: " + e.getMessage())
+                );
             }
         });
 
@@ -36,28 +42,40 @@ public class NotaAlunosController {
             try {
                 int campusId = Integer.parseInt(req.params(":campusId"));
 
-                List<NotaAlunos> relatorio = notaAlunosDAO.listarPorCampus(campusId);
+                List<NotaAlunos> relatorios = notaAlunosDAO.listarPorCampus(campusId);
 
                 res.status(200);
-                return gson.toJson(relatorio);
+                res.type("application/json");
+                return gson.toJson(relatorios);
+
             } catch (NumberFormatException e) {
                 res.status(400);
-                return gson.toJson(new RespostaErro("ID de Campus inválido."));
+                return gson.toJson(
+                        new RespostaErro("ID de campus inválido.")
+                );
             } catch (Exception e) {
                 res.status(500);
-                return gson.toJson(new RespostaErro("Erro ao buscar relatório: " + e.getMessage()));
+                return gson.toJson(
+                        new RespostaErro("Erro ao buscar relatórios: " + e.getMessage())
+                );
             }
         });
 
         post(PATH, (req, res) -> {
             try {
                 NotaAlunos novoRelatorio = gson.fromJson(req.body(), NotaAlunos.class);
+
                 notaAlunosDAO.salvar(novoRelatorio);
+
                 res.status(201);
+                res.type("application/json");
                 return gson.toJson(novoRelatorio);
+
             } catch (Exception e) {
                 res.status(400);
-                return gson.toJson(new RespostaErro("Erro ao salvar relatório: " + e.getMessage()));
+                return gson.toJson(
+                        new RespostaErro("Erro ao salvar relatório: " + e.getMessage())
+                );
             }
         });
     }

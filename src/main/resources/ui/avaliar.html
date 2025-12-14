@@ -1,28 +1,90 @@
-<form onsubmit="event.preventDefault(); enviarFeedback();">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuZERO - Avaliação</title>
 
-    <p class="titulo-estrelas">Dê uma nota para o almoço de hoje:</p>
+    <link rel="stylesheet" href="css/styleavaliar.css">
+</head>
 
-    <div class="estrelas">
-        <input type="radio" id="estrela5" name="nota" value="5"><label for="estrela5">★</label>
-        <input type="radio" id="estrela4" name="nota" value="4"><label for="estrela4">★</label>
-        <input type="radio" id="estrela3" name="nota" value="3"><label for="estrela3">★</label>
-        <input type="radio" id="estrela2" name="nota" value="2"><label for="estrela2">★</label>
-        <input type="radio" id="estrela1" name="nota" value="1"><label for="estrela1">★</label>
+<body>
+
+<aside class="menu-lateral">
+    <div class="logo-area">
+        <img src="img/logo.png" alt="Logo RuZERO" class="logo">
+        <h1>RuZERO</h1>
     </div>
 
-    <label for="ruim">O que estava ruim?</label>
-    <select id="ruim" name="ruim">
-        <option value="">Selecione...</option>
-        <option value="Proteina">Proteína</option>
-        <option value="Acompanhamento">Acompanhamento</option>
-        <option value="Guarnição">Guarnição</option>
-        <option value="Salada">Salada</option>
-        <option value="Sobremesa">Sobremesa</option>
-        <option value="Outro">Outro</option>
-    </select>
+    <nav>
+        <a href="cardapioaluno.html">🍽️ Ver cardápio</a>
+        <a class="ativo" href="avaliar.html">⭐ Avaliar Refeição</a>
+    </nav>
+</aside>
 
-    <button type="submit">Enviar Avaliação</button>
+<main class="conteudo">
 
-</form>
+    <header class="topo">
+        <div class="titulo-area">
+            <span class="icone">📝</span>
+            <h2>Deixe sua avaliação do almoço!</h2>
+        </div>
+
+        <div class="perfil-usuario">
+            <div class="icone-usuario">👤</div>
+        </div>
+    </header>
+
+    <section class="avaliacao-area">
+
+        <form id="formFeedback" onsubmit="event.preventDefault(); enviarFeedback();">
+
+            <label for="gostou">Você gostou do almoço?</label>
+            <select id="gostou" name="gostou">
+                <option value="">Selecione...</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+
+            <p class="titulo-estrelas">Dê uma nota para o almoço de hoje:</p>
+
+            <div class="estrelas">
+                <input type="radio" id="estrela5" name="nota" value="5">
+                <label for="estrela5">★</label>
+
+                <input type="radio" id="estrela4" name="nota" value="4">
+                <label for="estrela4">★</label>
+
+                <input type="radio" id="estrela3" name="nota" value="3">
+                <label for="estrela3">★</label>
+
+                <input type="radio" id="estrela2" name="nota" value="2">
+                <label for="estrela2">★</label>
+
+                <input type="radio" id="estrela1" name="nota" value="1">
+                <label for="estrela1">★</label>
+            </div>
+
+            <label for="ruim">O que poderia melhorar?</label>
+            <select id="ruim" name="ruim">
+                <option value="">Selecione...</option>
+                <option value="Proteina">Proteína</option>
+                <option value="Acompanhamento">Acompanhamento</option>
+                <option value="Guarnicao">Guarnição</option>
+                <option value="Salada">Salada</option>
+                <option value="Sobremesa">Sobremesa</option>
+                <option value="Outro">Outro</option>
+            </select>
+
+            <button type="submit">Enviar Avaliação</button>
+
+        </form>
+
+    </section>
+
+</main>
 
 <script src="js/feedback.js"></script>
+
+</body>
+</html>

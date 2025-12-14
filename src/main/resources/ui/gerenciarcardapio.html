@@ -6,11 +6,13 @@
   <title>RuZERO - Gerenciar Cardápio</title>
   <link rel="stylesheet" href="/css/stylegerenciar.css" />
 </head>
+
 <body>
+
 <aside class="menu-lateral">
   <div class="logo-area">
     <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
-    <h1>RuZERO</h1>
+    <h1>RUZERO</h1>
   </div>
 
   <nav>
@@ -27,6 +29,7 @@
       <h2>Gerenciar Cardápio</h2>
     </div>
   </header>
+
   <section class="area-cardapio">
 
     <table class="tabela-cardapio">
@@ -44,29 +47,49 @@
       <tbody>
       <tr>
         <td>PRATO PRINCIPAL</td>
-        <td><input class="inp"></td><td><input class="inp"></td>
-        <td><input class="inp"></td><td><input class="inp"></td><td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
       </tr>
+
       <tr>
         <td>ACOMPANHAMENTO</td>
-        <td><input class="inp"></td><td><input class="inp"></td>
-        <td><input class="inp"></td><td><input class="inp"></td><td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
       </tr>
+
       <tr>
         <td>GUARNIÇÃO</td>
-        <td><input class="inp"></td><td><input class="inp"></td>
-        <td><input class="inp"></td><td><input class="inp"></td><td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
       </tr>
+
       <tr>
         <td>SALADA</td>
-        <td><input class="inp"></td><td><input class="inp"></td>
-        <td><input class="inp"></td><td><input class="inp"></td><td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
       </tr>
+
       <tr>
         <td>SOBREMESA</td>
-        <td><input class="inp"></td><td><input class="inp"></td>
-        <td><input class="inp"></td><td><input class="inp"></td><td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
+        <td><input class="inp"></td>
       </tr>
+
       </tbody>
     </table>
 
@@ -74,28 +97,7 @@
   </section>
 </main>
 
-<script>
-  function formatar(data) {
-    return data.toLocaleDateString("pt-BR", { day: '2-digit', month: '2-digit' });
-  }
-
-  function gerarDatasSemana() {
-    const hoje = new Date();
-    let diaSemana = hoje.getDay(); // 0 dom - 6 sab
-
-    const offset = diaSemana === 0 ? -6 : 1 - diaSemana;
-
-    const segunda = new Date();
-    segunda.setDate(hoje.getDate() + offset);
-
-    for (let i = 0; i < 5; i++) {
-      const dia = new Date(segunda);
-      dia.setDate(segunda.getDate() + i);
-      document.getElementById("d" + (i + 1)).innerText = formatar(dia);
-    }
-  }
-  gerarDatasSemana();
-</script>
+<script src="/js/gerenciarcardapio.js" defer></script>
 
 </body>
 </html>

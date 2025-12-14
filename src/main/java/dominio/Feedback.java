@@ -7,21 +7,11 @@ public class Feedback {
     private Integer idFeedback;
     private String nota;
     private String comentario;
-    private transient LocalDateTime dataHora;
-    private Campus campus;
-    private Integer alunoMatricula;
+    private LocalDateTime dataHora;
+    private Integer idCampus;
+    private Integer idAluno;
 
     public Feedback() {
-        this.dataHora = LocalDateTime.now();
-    }
-
-    public Feedback(Integer idFeedback, String nota, String comentario,
-                    Campus campus, Integer alunoMatricula) {
-        this.idFeedback = idFeedback;
-        this.nota = nota;
-        this.comentario = comentario;
-        this.campus = campus;
-        this.alunoMatricula = alunoMatricula;
         this.dataHora = LocalDateTime.now();
     }
 
@@ -57,20 +47,20 @@ public class Feedback {
         this.dataHora = dataHora;
     }
 
-    public Campus getCampus() {
-        return campus;
+    public Integer getIdCampus() {
+        return idCampus;
     }
 
-    public void setCampus(Campus campus) {
-        this.campus = campus;
+    public void setIdCampus(Integer idCampus) {
+        this.idCampus = idCampus;
     }
 
-    public Integer getAlunoMatricula() {
-        return alunoMatricula;
+    public Integer getIdAluno() {
+        return idAluno;
     }
 
-    public void setAlunoMatricula(Integer alunoMatricula) {
-        this.alunoMatricula = alunoMatricula;
+    public void setIdAluno(Integer idAluno) {
+        this.idAluno = idAluno;
     }
 
     @Override
@@ -80,7 +70,8 @@ public class Feedback {
                 ", nota='" + nota + '\'' +
                 ", comentario='" + comentario + '\'' +
                 ", dataHora=" + dataHora +
-                ", alunoMatricula=" + alunoMatricula +
+                ", idCampus=" + idCampus +
+                ", idAluno=" + idAluno +
                 '}';
     }
 }

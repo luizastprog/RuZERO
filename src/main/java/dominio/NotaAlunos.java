@@ -5,22 +5,22 @@ public class NotaAlunos {
     private Integer idNotaAlunos;
     private Double mediaNotas;
     private String totalAvaliacao;
-    private Feedback feedback;
-    private Campus campus;
-    private Gestao gestao;
+    private Integer idFeedback;
+    private Integer idCampus;
+    private Integer idGestao;
 
     public NotaAlunos() {
     }
 
     public NotaAlunos(Integer idNotaAlunos, Double mediaNotas,
-                      String totalAvaliacao, Feedback feedback,
-                      Campus campus, Gestao gestao) {
+                      String totalAvaliacao, Integer idFeedback,
+                      Integer idCampus, Integer idGestao) {
         this.idNotaAlunos = idNotaAlunos;
         this.mediaNotas = mediaNotas;
         this.totalAvaliacao = totalAvaliacao;
-        this.feedback = feedback;
-        this.campus = campus;
-        this.gestao = gestao;
+        this.idFeedback = idFeedback;
+        this.idCampus = idCampus;
+        this.idGestao = idGestao;
     }
 
     public Integer getIdNotaAlunos() {
@@ -47,28 +47,24 @@ public class NotaAlunos {
         this.totalAvaliacao = totalAvaliacao;
     }
 
-    public Feedback getFeedback() {
-        return feedback;
+    public Integer getIdFeedback() { return idFeedback; }
+
+    public void setIdFeedback(Integer idFeedback) {
+        this.idFeedback = idFeedback;
     }
 
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
+    public Integer getIdCampus() { return idCampus; }
+
+    public void setIdCampus(Integer idCampus) {
+        this.idCampus = idCampus;
     }
 
-    public Campus getCampus() {
-        return campus;
+    public Integer getIdGestao() {
+        return idGestao;
     }
 
-    public void setCampus(Campus campus) {
-        this.campus = campus;
-    }
-
-    public Gestao getGestao() {
-        return gestao;
-    }
-
-    public void setGestao(Gestao gestao) {
-        this.gestao = gestao;
+    public void setIdGestao(Integer idGestao) {
+        this.idGestao = idGestao;
     }
 
     @Override

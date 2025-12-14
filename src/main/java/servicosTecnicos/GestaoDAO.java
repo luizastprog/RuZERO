@@ -32,37 +32,6 @@ public class GestaoDAO {
         }
     }
 
-    public void atualizar(Gestao gestao) {
-        String sql = "UPDATE Gestao SET login = ?, senha = ? WHERE idGestao = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, gestao.getLogin());
-            stmt.setString(2, gestao.getSenha());
-            stmt.setInt(3, gestao.getIdGestao());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar gestão: " + e.getMessage(), e);
-        }
-    }
-
-    public void deletar(int idGestao) {
-        String sql = "DELETE FROM Gestao WHERE idGestao = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idGestao);
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao deletar gestão: " + e.getMessage(), e);
-        }
-    }
-
     public boolean fazerLogin(String login, String senha) {
         String sql = "SELECT COUNT(*) FROM Gestao WHERE login = ? AND senha = ?";
 
@@ -122,26 +91,6 @@ public class GestaoDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao autenticar gestão: " + e.getMessage(), e);
-        }
-        return null;
-    }
-
-    public Gestao buscarPorId(int idGestao) {
-        String sql = "SELECT * FROM Gestao WHERE idGestao = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idGestao);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return mapearResultSet(rs);
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar gestão por ID: " + e.getMessage(), e);
         }
         return null;
     }

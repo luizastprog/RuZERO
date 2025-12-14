@@ -12,7 +12,7 @@ public class CampusDAO {
     }
 
     public void salvar(Campus campus) {
-        String sql = "INSERT INTO campus (nome) VALUES (?)";
+        String sql = "INSERT INTO Campus (nome) VALUES (?)";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -37,7 +37,7 @@ public class CampusDAO {
     }
 
     public Campus buscarPorId(Integer id) {
-        String sql = "SELECT * FROM campus WHERE idCampus = ?";
+        String sql = "SELECT * FROM Campus WHERE idCampus = ?";
         Campus campus = null;
 
         try (Connection conn = getConnection();
@@ -48,9 +48,8 @@ public class CampusDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     campus = new Campus();
-                    campus.setIdCampus(rs.getInt("id_campus"));
+                    campus.setIdCampus(rs.getInt("idCampus"));
                     campus.setNome(rs.getString("nome"));
-
                 }
             }
         } catch (SQLException e) {
@@ -60,8 +59,9 @@ public class CampusDAO {
         return campus;
     }
 
+
     public List<Campus> listarTodos() {
-        String sql = "SELECT * FROM campus ORDER BY id_campus";
+        String sql = "SELECT * FROM Campus ORDER BY idCampus";
         List<Campus> lista = new ArrayList<>();
 
         try (Connection conn = getConnection();
@@ -70,38 +70,20 @@ public class CampusDAO {
 
             while (rs.next()) {
                 Campus campus = new Campus();
-                campus.setIdCampus(rs.getInt("id_campus"));
+                campus.setIdCampus(rs.getInt("idCampus"));
                 campus.setNome(rs.getString("nome"));
                 lista.add(campus);
             }
 
         } catch (SQLException e) {
-            System.err.println("ERRO ao listar campi!");
+            System.err.println("ERRO ao listar campus!");
             e.printStackTrace();
         }
         return lista;
     }
 
-    public void atualizar(Campus campus) {
-        String sql = "UPDATE campus SET nome = ? WHERE id_campus = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, campus.getNome());
-            stmt.setInt(2, campus.getIdCampus());
-
-            stmt.executeUpdate();
-            System.out.println("Campus atualizado no banco de dados!");
-
-        } catch (SQLException e) {
-            System.err.println("ERRO ao atualizar campus!");
-            e.printStackTrace();
-        }
-    }
-
     public void deletar(int id) {
-        String sql = "DELETE FROM campus WHERE id_campus = ?";
+        String sql = "DELETE FROM Campus WHERE idCampus = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

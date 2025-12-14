@@ -10,7 +10,7 @@
 <body>
 
 <header class="cabecalho">
-  <img src="img/logo.png" alt="Logo RuZERO" class="logo" />
+  <img src="/img/logo.png" alt="Logo RuZERO" class="logo" />
   <h1>RuZERO</h1>
 </header>
 
@@ -18,12 +18,13 @@
   <div class="caixa-login">
     <h2>ALUNO</h2>
 
-    <form id="loginForm">
+    <form id="loginForm" onsubmit="event.preventDefault(); cadastrarOuLogarAluno();">
+
       <label for="nome">Nome</label>
-      <input type="text" id="nome" required />
+      <input type="text" id="nome" placeholder="Digite seu nome" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" required />
+      <input type="email" id="email" placeholder="Digite seu email" required />
 
       <label for="campus">Selecione seu campus</label>
       <select id="campus" required>
@@ -33,13 +34,13 @@
         <option value="3">Campus III</option>
       </select>
 
-      <button type="button" onclick="cadastrarOuLogarAluno()">ENTRAR</button>
-    </form>
+      <button type="submit">ENTRAR</button>
 
+    </form>
   </div>
 </main>
 
-<script src="js/loginAluno.js"></script>
+<script src="/js/loginaluno.js"></script>
 
 </body>
 </html>

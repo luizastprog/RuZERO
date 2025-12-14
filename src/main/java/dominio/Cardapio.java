@@ -6,18 +6,15 @@ public class Cardapio {
 
     private Integer idCardapio;
     private LocalDate data;
-    private CardapioAluno cardapioAluno;
-    private Gestao gestao;
+    private Integer idGestao;
 
     public Cardapio() {
     }
 
-    public Cardapio(Integer idCardapio, LocalDate data,
-                    CardapioAluno cardapioAluno, Gestao gestao) {
+    public Cardapio(Integer idCardapio, LocalDate data, Integer idGestao) {
         this.idCardapio = idCardapio;
         this.data = data;
-        this.cardapioAluno = cardapioAluno;
-        this.gestao = gestao;
+        this.idGestao = idGestao;
     }
 
     public Integer getIdCardapio() {
@@ -36,20 +33,12 @@ public class Cardapio {
         this.data = data;
     }
 
-    public CardapioAluno getCardapioAluno() {
-        return cardapioAluno;
+    public Integer getIdGestao() {
+        return idGestao;
     }
 
-    public void setCardapioAluno(CardapioAluno cardapioAluno) {
-        this.cardapioAluno = cardapioAluno;
-    }
-
-    public Gestao getGestao() {
-        return gestao;
-    }
-
-    public void setGestao(Gestao gestao) {
-        this.gestao = gestao;
+    public void setIdGestao(Integer idGestao) {
+        this.idGestao = idGestao;
     }
 
     @Override
@@ -57,6 +46,7 @@ public class Cardapio {
         return "Cardapio{" +
                 "idCardapio=" + idCardapio +
                 ", data=" + data +
+                ", idGestao=" + idGestao +
                 '}';
     }
 }

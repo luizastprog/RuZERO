@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RuZERO - Verificar Cardápio</title>
+
     <link rel="stylesheet" href="/css/stylecardapio.css" />
 </head>
 <body>
@@ -21,17 +22,22 @@
 </aside>
 
 <main class="conteudo">
+
     <header class="topo">
         <div class="titulo-area">
             <span class="icone">🛒</span>
             <h2>Verificar Cardápio</h2>
         </div>
+
         <div class="perfil-usuario">
             <select id="selectCampus" class="select-campus">
-                <option value="Campus I">Campus I</option>
-                <option value="Campus II">Campus II</option>
-                <option value="Campus III">Campus III</option>
+                <option value="1">Campus I</option>
+                <option value="2">Campus II</option>
+                <option value="3">Campus III</option>
             </select>
+
+            <span id="campusUsuario" style="margin-left:8px;"></span>
+
             <div class="icone-usuario">👤</div>
         </div>
     </header>
@@ -41,13 +47,14 @@
             <thead>
             <tr>
                 <th>COMPOSIÇÃO</th>
-                <th>17/11</th>
-                <th>18/11</th>
-                <th>19/11</th>
-                <th>20/11</th>
-                <th>21/11</th>
+                <th id="d1"></th>
+                <th id="d2"></th>
+                <th id="d3"></th>
+                <th id="d4"></th>
+                <th id="d5"></th>
             </tr>
             </thead>
+
             <tbody>
             <tr>
                 <td>PRATO PRINCIPAL</td>
@@ -73,10 +80,33 @@
         </table>
     </section>
 </main>
+
 <script>
-    const campusAluno = localStorage.getItem("alunoCampus");
-    document.getElementById("campusUsuario").innerText =
-        campusAluno ? campusAluno : "Campus ?";
+    (function(){
+        const select = document.getElementById('selectCampus');
+        const saved = localStorage.getItem('alunoCampusId') || localStorage.getItem('alunoCampus'); // tenta chaves antigas
+        if (saved) {
+            for (const opt of select.options) {
+                if (opt.value === String(saved) || opt.textContent.trim() === String(saved)) {
+                    opt.selected = true;
+                    break;
+                }
+            }
+            const campusNome = select.options[select.selectedIndex]?.textContent || '';
+            const campusSpan = document.getElementById('campusUsuario');
+            if (campusSpan) campusSpan.textContent = campusNome;
+        }
+
+        select.addEventListener('change', () => {
+            localStorage.setItem('alunoCampusId', select.value);
+            localStorage.setItem('alunoCampus', select.options[select.selectedIndex].textContent);
+            const campusSpan = document.getElementById('campusUsuario');
+            if (campusSpan) campusSpan.textContent = select.options[select.selectedIndex].textContent;
+        });
+    })();
 </script>
+
+<script src="/js/cardapioaluno.js" defer></script>
+
 </body>
 </html>

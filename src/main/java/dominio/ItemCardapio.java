@@ -3,13 +3,11 @@ package dominio;
 public class ItemCardapio {
 
     private Integer idItemCardapio;
+    private Integer idCardapio;
+    private String tipoItem;
+    private String nome;
 
-    public ItemCardapio() {
-    }
-
-    public ItemCardapio(Integer idItemCardapio) {
-        this.idItemCardapio = idItemCardapio;
-    }
+    public ItemCardapio() {}
 
     public Integer getIdItemCardapio() {
         return idItemCardapio;
@@ -19,8 +17,27 @@ public class ItemCardapio {
         this.idItemCardapio = idItemCardapio;
     }
 
-    @Override
-    public String toString() {
-        return "ItemCardapio [id=" + idItemCardapio + "]";
+    public Integer getIdCardapio() {
+        return idCardapio;
+    }
+
+    public void setIdCardapio(Integer idCardapio) {
+        this.idCardapio = idCardapio;
+    }
+
+    public String getTipoItem() {
+        return tipoItem;
+    }
+
+    public void setTipoItem(String tipoItem) {
+        this.tipoItem = tipoItem;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

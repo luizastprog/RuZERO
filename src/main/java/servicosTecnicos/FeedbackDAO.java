@@ -1,16 +1,15 @@
 package servicosTecnicos;
 
 import dominio.Feedback;
-import dominio.Campus;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FeedbackDAO {
-
-    private final CampusDAO campusDAO = new CampusDAO();
 
     private Connection getConnection() {
         return Conexao.getConexao();
@@ -18,7 +17,7 @@ public class FeedbackDAO {
 
     public void salvar(Feedback feedback) {
 
-        String sql = "INSERT INTO feedback (nota, comentario, data_hora, campus_id_campus, aluno_matricula) " +
+        String sql = "INSERT INTO Feedback (nota, comentario, dataHora, idCampus, idAluno) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
@@ -27,13 +26,13 @@ public class FeedbackDAO {
             stmt.setString(1, feedback.getNota());
             stmt.setString(2, feedback.getComentario());
 
-            LocalDateTime data = (feedback.getDataHora() == null)
-                    ? LocalDateTime.now()
-                    : feedback.getDataHora();
+            LocalDateTime data = feedback.getDataHora() != null
+                    ? feedback.getDataHora()
+                    : LocalDateTime.now();
 
             stmt.setTimestamp(3, Timestamp.valueOf(data));
-            stmt.setInt(4, feedback.getCampus().getIdCampus());
-            stmt.setInt(5, feedback.getAlunoMatricula());
+            stmt.setInt(4, feedback.getIdCampus());
+            stmt.setInt(5, feedback.getIdAluno());
 
             stmt.executeUpdate();
 
@@ -46,38 +45,14 @@ public class FeedbackDAO {
             System.out.println("✔ Feedback salvo!");
 
         } catch (SQLException e) {
-            System.err.println("❌ ERRO ao salvar feedback!");
+            System.err.println("ERRO ao salvar feedback!");
             e.printStackTrace();
         }
-    }
-
-    public Feedback buscarPorId(Integer id) {
-
-        String sql = "SELECT * FROM feedback WHERE id_feedback = ?";
-        Feedback fb = null;
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    fb = mapearFeedback(rs);
-                }
-            }
-
-        } catch (SQLException e) {
-            System.err.println("❌ ERRO ao buscar feedback por ID!");
-            e.printStackTrace();
-        }
-
-        return fb;
     }
 
     public List<Feedback> listarTodos() {
 
-        String sql = "SELECT * FROM feedback ORDER BY data_hora DESC";
+        String sql = "SELECT * FROM Feedback ORDER BY dataHora DESC";
         List<Feedback> lista = new ArrayList<>();
 
         try (Connection conn = getConnection();
@@ -89,97 +64,118 @@ public class FeedbackDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ ERRO ao listar feedbacks!");
             e.printStackTrace();
         }
 
         return lista;
     }
 
-    public List<Feedback> listarPorCampus(Integer campusId) {
+    public List<Feedback> listarPorCampus(Integer idCampus) {
 
-        String sql = "SELECT * FROM feedback WHERE campus_id_campus = ? ORDER BY data_hora DESC";
+        String sql = "SELECT * FROM Feedback WHERE idCampus = ? ORDER BY dataHora DESC";
         List<Feedback> lista = new ArrayList<>();
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, campusId);
+            stmt.setInt(1, idCampus);
             ResultSet rs = stmt.executeQuery();
 
-            Campus campus = campusDAO.buscarPorId(campusId);
-
             while (rs.next()) {
-                Feedback fb = mapearFeedback(rs);
-                fb.setCampus(campus);
-                lista.add(fb);
+                lista.add(mapearFeedback(rs));
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ ERRO ao listar feedbacks por campus!");
             e.printStackTrace();
         }
 
         return lista;
-    }
-
-    public void atualizar(Feedback fb) {
-
-        String sql = "UPDATE feedback SET nota = ?, comentario = ?, campus_id_campus = ?, aluno_matricula = ? " +
-                "WHERE id_feedback = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, fb.getNota());
-            stmt.setString(2, fb.getComentario());
-            stmt.setInt(3, fb.getCampus().getIdCampus());
-            stmt.setInt(4, fb.getAlunoMatricula());
-            stmt.setInt(5, fb.getIdFeedback());
-
-            stmt.executeUpdate();
-            System.out.println("✔ Feedback atualizado!");
-
-        } catch (SQLException e) {
-            System.err.println("❌ ERRO ao atualizar feedback!");
-            e.printStackTrace();
-        }
-    }
-
-    public void deletar(int id) {
-
-        String sql = "DELETE FROM feedback WHERE id_feedback = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-
-            System.out.println("✔ Feedback deletado!");
-
-        } catch (SQLException e) {
-            System.err.println("❌ ERRO ao deletar feedback!");
-            e.printStackTrace();
-        }
     }
 
     private Feedback mapearFeedback(ResultSet rs) throws SQLException {
 
         Feedback fb = new Feedback();
 
-        fb.setIdFeedback(rs.getInt("id_feedback"));
+        fb.setIdFeedback(rs.getInt("idFeedback"));
         fb.setNota(rs.getString("nota"));
         fb.setComentario(rs.getString("comentario"));
 
-        Timestamp ts = rs.getTimestamp("data_hora");
+        Timestamp ts = rs.getTimestamp("dataHora");
         fb.setDataHora(ts != null ? ts.toLocalDateTime() : LocalDateTime.now());
 
-        fb.setAlunoMatricula(rs.getInt("aluno_matricula"));
-
-        Campus campus = campusDAO.buscarPorId(rs.getInt("campus_id_campus"));
-        fb.setCampus(campus);
+        fb.setIdCampus(rs.getInt("idCampus"));
+        fb.setIdAluno(rs.getInt("idAluno"));
 
         return fb;
+    }
+
+    public List<Map<String, Object>> listarMediasPorCampus() {
+
+        String sql = """
+            SELECT c.idCampus, c.nome,
+                   AVG(CAST(f.nota AS DECIMAL(10,2))) AS media
+            FROM Campus c
+            LEFT JOIN Feedback f ON f.idCampus = c.idCampus
+            GROUP BY c.idCampus, c.nome
+            ORDER BY c.idCampus
+        """;
+
+        List<Map<String, Object>> lista = new ArrayList<>();
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+
+                Map<String, Object> campus = new HashMap<>();
+                campus.put("idCampus", rs.getInt("idCampus"));
+                campus.put("nome", rs.getString("nome"));
+
+                Map<String, Object> item = new HashMap<>();
+                item.put("campus", campus);
+                item.put("mediaNotas", rs.getDouble("media"));
+
+                lista.add(item);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public List<Map<String, Object>> listarMediaNotasPorHorario(int idCampus) {
+
+        String sql = """
+            SELECT HOUR(dataHora) AS hora,
+                   AVG(CAST(nota AS DECIMAL(10,2))) AS mediaNota
+            FROM Feedback
+            WHERE idCampus = ?
+            GROUP BY HOUR(dataHora)
+            ORDER BY hora
+        """;
+
+        List<Map<String, Object>> lista = new ArrayList<>();
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idCampus);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Map<String, Object> item = new HashMap<>();
+                item.put("hora", rs.getInt("hora"));
+                item.put("mediaNota", rs.getDouble("mediaNota"));
+                lista.add(item);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

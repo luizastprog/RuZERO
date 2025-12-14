@@ -1,15 +1,7 @@
 package web.api;
 
-import spark.Spark;
 import static spark.Spark.*;
 import com.google.gson.Gson;
-import web.api.AlunoController;
-import web.api.CampusController;
-import web.api.CardapioController;
-import web.api.EnderecoController;
-import web.api.FeedbackController;
-import web.api.GestaoController;
-import web.api.NotaAlunosController;
 
 public class SparkInit {
 
@@ -17,7 +9,16 @@ public class SparkInit {
 
         port(4567);
 
-        staticFiles.location("/ui");
+        String devPath = java.nio.file.Paths.get("src", "main", "resources", "ui").toAbsolutePath().toString();
+        java.io.File devFolder = new java.io.File(devPath);
+
+        if (devFolder.exists() && devFolder.isDirectory()) {
+            System.out.println("⚙️  Dev mode: usando arquivos estáticos em " + devPath);
+            staticFiles.externalLocation(devPath);
+        } else {
+            System.out.println("📦 Prod mode: usando arquivos estáticos do classpath /ui");
+            staticFiles.location("/ui");
+        }
 
         before("/api/*", (req, res) -> {
             res.header("Access-Control-Allow-Origin", "*");
@@ -48,7 +49,7 @@ public class SparkInit {
             new EnderecoController();
             new FeedbackController();
             new GestaoController();
-            new NotaAlunosController();
+            new ItemCardapioController();
 
         });
 
@@ -56,6 +57,9 @@ public class SparkInit {
             res.status(404);
             res.type("application/json");
             return new Gson().toJson(new RespostaErro("Rota não encontrada"));
+        });
+        before((req, res) -> {
+            System.out.println("ROTA ACESSADA: " + req.requestMethod() + " " + req.pathInfo());
         });
 
         awaitInitialization();

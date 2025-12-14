@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import servicosTecnicos.CampusDAO;
 import dominio.Campus;
 import java.util.List;
+import com.google.gson.GsonBuilder;
+
 
 public class CampusController {
 
@@ -13,7 +15,7 @@ public class CampusController {
 
     public CampusController() {
         this.campusDAO = new CampusDAO();
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().create();
         setupEndpoints();
     }
 

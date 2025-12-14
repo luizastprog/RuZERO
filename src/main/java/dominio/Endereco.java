@@ -17,12 +17,6 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public Endereco(String rua, String numero, String bairro) {
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-    }
-
     public Integer getIdEndereco() {
         return idEndereco;
     }
@@ -57,6 +51,11 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco [id=" + idEndereco + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + "]";
+        return "Endereco{" +
+                "idEndereco=" + idEndereco +
+                ", rua='" + rua + '\'' +
+                ", numero='" + numero + '\'' +
+                ", bairro='" + bairro + '\'' +
+                '}';
     }
 }

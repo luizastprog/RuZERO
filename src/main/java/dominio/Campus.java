@@ -4,14 +4,17 @@ public class Campus {
 
     private Integer idCampus;
     private String nome;
-    private Endereco endereco;
+
     public Campus() {
     }
 
-    public Campus(Integer idCampus, String nome, Endereco endereco) {
+    public Campus(Integer idCampus, String nome) {
         this.idCampus = idCampus;
         this.nome = nome;
-        this.endereco = endereco;
+    }
+
+    public Campus(Integer idCampus) {
+        this.idCampus = idCampus;
     }
 
     public Integer getIdCampus() {
@@ -30,17 +33,11 @@ public class Campus {
         this.nome = nome;
     }
 
-    public Endereco getEndereco() {this.endereco = endereco;
-        return null;
-    }
-    public void setEndereco(Endereco endereco) {this.endereco = endereco; }
-
     @Override
     public String toString() {
         return "Campus{" +
                 "idCampus=" + idCampus +
-                ", nome='" + nome +
-                ", endereco=" + endereco +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }

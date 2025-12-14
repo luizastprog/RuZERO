@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RuZERO - Relatórios</title>
-  <link rel="stylesheet" href="/css/stylerelatorio.css" />
+  <link rel="stylesheet" href="/css/stylerelatorio.css?v=10" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -21,6 +21,7 @@
     <a href="gerenciarcardapio.html"> Gerenciar Cardápio</a>
   </nav>
 </aside>
+
 <main class="conteudo">
   <header class="topo">
     <div class="titulo-area">
@@ -41,32 +42,50 @@
 
   <div id="popupCalendario" class="popup-calendario escondido">
     <input type="date" id="inputData" />
-    <button id="fecharPopup" class="fechar-popup">Fechar</button>
+    <button id="fecharPopup" class="fechar-popup">Confirmar</button>
   </div>
+
   <section class="painel">
+
     <div class="box grande">
       <h3>Calendário Selecionado</h3>
       <p id="dataEscolhida" class="data-info">Nenhuma data selecionada</p>
     </div>
+
     <div class="linha-superior">
       <div class="box medio">
         <h3>Índice de insatisfação por horário</h3>
-        <canvas id="graficoHorario"></canvas>
+
+        <div class="grafico-largo">
+          <canvas id="graficoHorario"></canvas>
+        </div>
+
       </div>
     </div>
+
     <div class="linha-inferior">
+
       <div class="box medio">
         <h3>Percentual de insatisfação por item</h3>
-        <canvas id="graficoPizza"></canvas>
+
+        <div class="grafico-container">
+          <canvas id="graficoPizza"></canvas>
+        </div>
+
       </div>
+
       <div class="box medio">
         <h3>Gráfico de Notas</h3>
-        <canvas id="graficoNotas"></canvas>
+
+        <div class="grafico-container">
+          <canvas id="graficoNotas"></canvas>
+        </div>
+
       </div>
     </div>
   </section>
 </main>
 
-<script src="script_relatorio.js"></script>
+<script src="/js/gerarrelatorio.js" defer></script>
 </body>
 </html>

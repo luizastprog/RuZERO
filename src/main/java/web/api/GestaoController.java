@@ -4,6 +4,7 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import servicosTecnicos.GestaoDAO;
 import dominio.Gestao;
+import com.google.gson.GsonBuilder;
 
 public class GestaoController {
 
@@ -12,7 +13,7 @@ public class GestaoController {
 
     public GestaoController() {
         this.gestaoDAO = new GestaoDAO();
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().create();
         setupEndpoints();
     }
 

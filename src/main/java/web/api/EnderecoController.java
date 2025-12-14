@@ -4,6 +4,7 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import dominio.Endereco;
 import servicosTecnicos.EnderecoDAO;
+import com.google.gson.GsonBuilder;
 
 public class EnderecoController {
 
@@ -12,7 +13,7 @@ public class EnderecoController {
 
     public EnderecoController() {
         this.enderecoDAO = new EnderecoDAO();
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().create();
         setupEndpoints();
     }
 
