@@ -1,3 +1,10 @@
+// classe de domínio NotaAlunos
+// representa um registro de avaliações
+// armazena informações como média das notas
+// total de avaliações e vínculos com feedback
+// campus e gestão, sendo usada para relatórios
+// e análises estatísticas do sistema
+
 package dominio;
 
 public class NotaAlunos {

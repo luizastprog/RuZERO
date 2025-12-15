@@ -1,3 +1,5 @@
+// adapter do Gson responsável por converter objetos LocalDateTime entre o formato Java e JSON, garantindo compatibilidade na API
+
 package util;
 
 import com.google.gson.TypeAdapter;

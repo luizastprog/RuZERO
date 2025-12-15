@@ -1,3 +1,7 @@
+// classe DAO responsável pelas operações de banco de dados da entidade Campus
+// permite buscar e listar os campus cadastrados no sistema, eles já foram cadastrados no banco de dados:
+// Campus I = 1, Campus II = 2, Campus III = 3
+
 package servicosTecnicos;
 
 import dominio.Campus;

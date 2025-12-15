@@ -1,3 +1,7 @@
+// classe DAO responsável pelas operações de banco de dados dos itens de cardápio
+// gerencia a criação e listagem de itens associados a cardápios
+
+
 package servicosTecnicos;
 
 import dominio.ItemCardapio;

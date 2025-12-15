@@ -1,3 +1,6 @@
+// classe de domínio que representa um cardápio
+// contém informações de data e gestão responsável
+
 package dominio;
 
 import java.time.LocalDate;

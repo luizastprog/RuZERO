@@ -1,3 +1,6 @@
+// classe DAO responsável pelas operações de banco de dados relacionadas a endereços
+// gerencia persistência e recuperação de dados de localização
+
 package servicosTecnicos;
 
 import dominio.Endereco;

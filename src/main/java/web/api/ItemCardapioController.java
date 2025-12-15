@@ -1,3 +1,7 @@
+// controller responsável pelo gerenciamento dos itens do cardápio
+// permite criar, listar e atualizar os itens associados a um cardápio específico.
+
+
 package web.api;
 
 import static spark.Spark.*;

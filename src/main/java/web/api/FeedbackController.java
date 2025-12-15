@@ -1,3 +1,7 @@
+// controller responsável pelas rotas de feedback (avaliações)
+// recebe avaliações dos alunos, valida os dados, salva no banco e disponibiliza consultas como médias por campus e horários
+
+
 package web.api;
 
 import static spark.Spark.*;

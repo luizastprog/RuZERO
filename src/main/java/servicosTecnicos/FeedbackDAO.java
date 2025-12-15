@@ -1,3 +1,6 @@
+// classe DAO responsável pelas operações de banco de dados da entidade Feedback.
+// salva avaliações, realiza consultas, calcula médias e gera dados para relatórios
+
 package servicosTecnicos;
 
 import dominio.Feedback;

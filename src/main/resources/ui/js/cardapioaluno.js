@@ -1,3 +1,6 @@
+// script responsável por buscar e exibir o cardápio do dia para o aluno
+// consome a API de cardápios e atualiza a interface
+
 console.log("Carregando cardápio do aluno...");
 
 function formatar(data) {

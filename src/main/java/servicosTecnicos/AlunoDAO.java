@@ -1,3 +1,6 @@
+// classe DAO responsável pelas operações de banco de dados da entidade Aluno
+// realiza cadastro, busca, listagem e verificação de alunos no banco
+
 package servicosTecnicos;
 
 import dominio.Aluno;

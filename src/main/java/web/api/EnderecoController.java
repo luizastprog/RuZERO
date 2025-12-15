@@ -1,3 +1,7 @@
+// controller responsável pelas operações relacionadas a endereços
+// gerencia cadastro e consulta de endereços associados a entidades do sistema
+
+
 package web.api;
 
 import static spark.Spark.*;

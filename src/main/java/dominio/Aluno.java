@@ -1,3 +1,6 @@
+// classe de domínio que representa um aluno do sistema
+// contém dados como nome, email e campus, sendo usada para comunicação entre API, DAO e banco de dados
+
 package dominio;
 
 public class Aluno {

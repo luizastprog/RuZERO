@@ -1,3 +1,7 @@
+// script responsável pela exibição do mapa de satisfação
+// consome a API para obter médias de avaliação por campus
+// e exibe essas informações visualmente no mapa
+
 const API = "/api";
 let charts = {};
 

@@ -1,3 +1,7 @@
+// classe utilitária usada para padronizar respostas de erro da API
+// Retorna mensagens de erro em formato JSON com status e descrição.
+
+
 package web.api;
 
 public class RespostaErro {

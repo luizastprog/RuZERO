@@ -1,3 +1,8 @@
+// script responsável pelo login e cadastro automático do aluno
+// primeiro tenta realizar login pelo email
+// se não encontrar o aluno, realiza o cadastro
+// armazena os dados do aluno para uso posterior
+
 const API = "http://localhost:4567/api/alunos";
 
 async function cadastrarOuLogarAluno() {

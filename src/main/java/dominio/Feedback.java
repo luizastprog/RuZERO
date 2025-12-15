@@ -1,3 +1,6 @@
+// classe de domínio que representa uma avaliação (feedback)
+// armazena nota, comentário, data/hora, aluno e campus associados
+
 package dominio;
 
 import java.time.LocalDateTime;

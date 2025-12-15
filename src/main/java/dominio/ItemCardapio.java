@@ -1,3 +1,7 @@
+// classe de domínio que representa um item do cardápio
+// armazena o nome do item, tipo e o cardápio ao qual pertence
+
+
 package dominio;
 
 public class ItemCardapio {

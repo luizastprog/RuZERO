@@ -1,3 +1,7 @@
+// script responsável pela geração de relatórios
+// busca dados estatísticos da API de feedback
+// e constrói gráficos e tabelas para análise da gestão
+
 const API = "/api";
 
 let graficoHorario = null;

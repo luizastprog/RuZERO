@@ -1,3 +1,6 @@
+// classe de domínio que representa um endereço
+// utilizada para armazenar informações de localização no sistema
+
 package dominio;
 
 public class Endereco {

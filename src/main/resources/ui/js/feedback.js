@@ -1,3 +1,8 @@
+// script responsável pelo envio de avaliações
+// coleta nota,"comentário", aluno e campus,
+// envia os dados para a API de feedback
+// e trata respostas de sucesso ou erro
+
 async function enviarFeedback() {
 
     const nota = document.querySelector('input[name="nota"]:checked')?.value;

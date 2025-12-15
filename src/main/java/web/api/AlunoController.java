@@ -1,3 +1,12 @@
+// controller responsável pelas rotas da API relacionadas a aluno
+// controla o login e o cadastro de alunos recebendo dados em JSON, validando e delegando as operações a AlunoDAO
+
+// a lógica do login do aluno é que na primeira vez que ele coloca seus dados, vai tentar realizar o login pelo email
+// mas se não encontrar, vai realizar o cadastro
+// na primeira versão não estávamos conseguindo possibilitar o aluno a entrar várias vezes, esse sendo o propósito
+// do projeto, estava apenas fazendo o cadastro 1 vez e na proxíma não conseguia mais entrar com as mesmas informações,
+// mas conseguimos consertar com a lógica de cadastro + login
+
 package web.api;
 
 import dominio.Aluno;

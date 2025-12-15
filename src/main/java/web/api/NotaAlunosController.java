@@ -1,3 +1,7 @@
+// controller responsável pelas rotas de relatórios de avaliações
+// permite expor endpoints para obter médias de notas, listar relatórios
+// e salvar novos relatórios
+
 package web.api;
 
 import static spark.Spark.*;

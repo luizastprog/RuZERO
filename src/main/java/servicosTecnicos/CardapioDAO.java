@@ -1,3 +1,6 @@
+// classe DAO responsável pelas operações de banco de dados da entidade Cardápio
+// permite salvar, buscar e listar cardápios por data
+
 package servicosTecnicos;
 
 import dominio.Cardapio;

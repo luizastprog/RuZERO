@@ -1,3 +1,7 @@
+// controller responsável pelas rotas de cardápio
+// permite consultar cardápios por data e salvar cardápios no banco de dados
+// o sistema entende 1 cardápio como uma data, ou seja, cada dia da semana é 1 cardápio
+
 package web.api;
 
 import static spark.Spark.*;

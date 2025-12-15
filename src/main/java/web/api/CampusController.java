@@ -1,3 +1,7 @@
+// controller responsável pelas rotas relacionadas aos campus
+// permite listar e buscar informações dos campus cadastrados no sistema
+
+
 package web.api;
 
 import static spark.Spark.*;

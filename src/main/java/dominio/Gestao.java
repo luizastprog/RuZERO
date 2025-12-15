@@ -1,3 +1,6 @@
+// classe de domínio que representa um usuário da gestão
+// contém dados de login utilizados para acesso administrativo ao sistema
+
 package dominio;
 public class Gestao {
 

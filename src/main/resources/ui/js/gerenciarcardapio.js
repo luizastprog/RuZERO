@@ -1,3 +1,7 @@
+// script responsável pela lógica de gerenciamento do cardápio
+// cria o cardápio, adiciona itens e envia os dados
+// para o back-end através da API
+
 console.log("Inicializando gerenciar cardápio...");
 
 function formatar(data) {

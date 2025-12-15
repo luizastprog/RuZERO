@@ -1,3 +1,6 @@
+// classe de domínio que representa um campus
+// utilizada para identificar a qual campus alunos e feedbacks pertencem
+
 package dominio;
 
 public class Campus {

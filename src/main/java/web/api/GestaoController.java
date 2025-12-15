@@ -1,3 +1,7 @@
+// controller responsável pelo login e operações da gestão
+// valida credenciais de acesso da gestão
+
+
 package web.api;
 
 import static spark.Spark.*;

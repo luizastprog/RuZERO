@@ -1,3 +1,6 @@
+// classe responsável por configurar e iniciar o servidor Spark Java
+// registra todos os controllers e inicializa o servidor
+
 package web.api;
 
 import static spark.Spark.*;

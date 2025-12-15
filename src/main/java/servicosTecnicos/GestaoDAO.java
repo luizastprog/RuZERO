@@ -1,3 +1,6 @@
+// classe DAO responsável pelas operações de banco de dados da entidade Gestão
+// realiza autenticação e acesso aos dados administrativos
+
 package servicosTecnicos;
 
 import dominio.Gestao;

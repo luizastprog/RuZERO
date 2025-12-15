@@ -1,3 +1,13 @@
+// classe DAO responsável pelo acesso aos dados de NotaAlunos
+// realiza operações de persistência e consulta dos relatórios
+// de avaliações, incluindo:
+// - salvamento de médias de notas,
+// - listagem geral de relatórios,
+// - listagem por campus,
+// - cálculo da média de notas por campus.
+// é utilizada principalmente para geração de relatórios
+// e visualizações administrativas
+
 package servicosTecnicos;
 
 import dominio.NotaAlunos;
